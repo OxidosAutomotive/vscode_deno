@@ -18,7 +18,6 @@ import type {
   DidUpgradeCheckParams,
   TestCommandOptions,
 } from "./types";
-import { WelcomePanel } from "./welcome";
 import {
   assert,
   getDenoCommandName,
@@ -243,8 +242,6 @@ export function startLanguageServer(
       !semver.satisfies(extensionContext.serverInfo.version, SERVER_SEMVER)
     ) {
       notifyServerSemver(extensionContext.serverInfo.version);
-    } else {
-      showWelcomePageIfFirstUse(context, extensionContext);
     }
   };
 
@@ -280,19 +277,6 @@ function notifyServerSemver(serverVersion: string) {
     `The version of Deno language server ("${serverVersion}") does not meet the requirements of the extension ("${SERVER_SEMVER}"). Please update Deno and restart.`,
     "OK",
   );
-}
-
-function showWelcomePageIfFirstUse(
-  context: vscode.ExtensionContext,
-  extensionContext: DenoExtensionContext,
-) {
-  const welcomeShown = context.globalState.get<boolean>("deno.welcomeShown") ??
-    false;
-
-  if (!welcomeShown) {
-    welcome(context, extensionContext)();
-    context.globalState.update("deno.welcomeShown", true);
-  }
 }
 
 export function showReferences(
@@ -397,15 +381,6 @@ export function test(
     }
 
     return createdTask;
-  };
-}
-
-export function welcome(
-  context: vscode.ExtensionContext,
-  _extensionContext: DenoExtensionContext,
-): Callback {
-  return () => {
-    WelcomePanel.createOrShow(context.extensionUri);
   };
 }
 

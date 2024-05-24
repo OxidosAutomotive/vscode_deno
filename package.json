@@ -44,11 +44,9 @@
     "onDebugResolve:typescriptreact",
     "onDebugResolve:javascript",
     "onDebugResolve:javascriptreact",
-    "onCommand:deno.client.welcome",
     "onCommand:deno.client.enable",
     "onCommand:deno.client.disable",
-    "onCommand:deno.reloadImportRegistries",
-    "onWebviewPanel:welcomeDeno"
+    "onCommand:deno.reloadImportRegistries"
   ],
   "main": "./client/dist/main",
   "contributes": {
@@ -112,12 +110,6 @@
         "category": "Deno",
         "description": "Provide a status document of the language server.",
         "enablement": "deno:lspReady"
-      },
-      {
-        "command": "deno.client.welcome",
-        "title": "Welcome",
-        "category": "Deno",
-        "description": "Open the welcome page for the Deno extension."
       },
       {
         "command": "deno.client.enable",
